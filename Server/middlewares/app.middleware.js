@@ -8,6 +8,7 @@ const {
 const connectMiddleware = (app) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  require('../auth');
   routerAPI(app);
   app.use(logErrors);
   app.use(boomErrorHandler);
