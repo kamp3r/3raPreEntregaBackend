@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require('uuid');
 const boom = require('@hapi/boom');
 const moment = require('moment');
 const MongoHandler = require('../../services/mongoHandler');
@@ -49,6 +50,19 @@ class ProductHandler extends MongoHandler {
       createdAt: moment(product.createdAt).format('DD-MM-YYYY HH:mm:ss'),
       updatedAt: moment(product.updatedAt).format('DD-MM-YYYY HH:mm:ss'),
     };
+  }
+  async createProduct(data) {
+    try {
+      const product = await this.collection.create({
+        ...data,
+        _id: uuidv4(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+      return product;
+    } catch (err) {
+      throw boom.badRequest(err);
+    }
   }
   async updateProduct(id, data) {
     const productToUpdate = await this.collection.findByIdAndUpdate(id, data);

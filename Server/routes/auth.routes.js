@@ -1,14 +1,14 @@
-const UserRouter = require("express").Router();
+const AuthRouter = require("express").Router();
 const passport = require("passport");
-const { userHandler } = require("../daos/");
+const { userHandler } = require("../daos");
 const validatorSchema = require("../middlewares/validatorSchema.middleware");
 const {
   createUserSchema,
   updateUserSchema,
 } = require("../schemas/user.schema");
 
-UserRouter.post(
-  "/",
+AuthRouter.post(
+  "/register",
   validatorSchema(createUserSchema, "body"),
   async (req, res, next) => {
     try {
@@ -20,7 +20,7 @@ UserRouter.post(
   }
 );
 
-UserRouter.post('/login', passport.authenticate('local', {session: false}), async (req, res, next) => {
+AuthRouter.post('/login', passport.authenticate('local', {session: true}), async (req, res, next) => {
     try {
         const user = req.user;
         res.status(200).json(user);
@@ -29,4 +29,4 @@ UserRouter.post('/login', passport.authenticate('local', {session: false}), asyn
       }
 })
 
-module.exports = UserRouter;
+module.exports = AuthRouter;

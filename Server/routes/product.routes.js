@@ -29,7 +29,8 @@ ProductRouter.post(
   validatorSchema(createProductSchema, 'body'),
   async (req, res, next) => {
     try {
-      const product = await productHandler.saveData(req.body);
+      console.log(req.body);
+      const product = await productHandler.createProduct(req.body);
       res.status(201).json(product);
     } catch (error) {
       next(error);
@@ -37,7 +38,7 @@ ProductRouter.post(
   }
 );
 
-ProductRouter.patch('/:id', async (req, res, next) => {
+ProductRouter.patch('/:id',validatorSchema(getProductSchema, 'params'),validatorSchema(updateProductSchema, 'body'), async (req, res, next) => {
   try {
     const data = req.body;
     const updatedAt = new Date();

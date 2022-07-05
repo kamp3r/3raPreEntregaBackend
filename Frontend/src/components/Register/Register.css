@@ -1,0 +1,55 @@
+.registerForm{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+
+.registerForm h2{
+    font-size: 3rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.registerForm form{
+    padding: 2rem;
+    width: 100%;
+}
+
+.registerForm form input{
+    width: 100%;
+    height: 4rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    margin: 1rem;
+}
+
+.registerForm form button{
+    display: block;
+    margin: 2rem auto;
+    width: 30%;
+    height: 4rem;
+    border-radius: 1rem;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    align-content: center;
+}
+
+.registerForm p{
+    font-size: 2rem;
+    text-align: center;
+}
+
+#chgButton{
+    width: 20%;
+    color: #fafafa;
+    font-size: 2rem;
+    background-color: rgb(45, 67, 97);
+    height: 4rem;
+    border: none;
+    border-radius: 1rem;
+}

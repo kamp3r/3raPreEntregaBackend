@@ -4,6 +4,7 @@ const _id = Joi.string();
 const name = Joi.string().min(4).max(80);
 const lastName = Joi.string().min(4).max(80);
 const phone = Joi.string().min(10).max(80);
+const role = Joi.string().valid('user', 'admin');
 const profilePicture = Joi.string().uri();
 const address = Joi.string();
 const email = Joi.string().email();
@@ -15,6 +16,7 @@ const createUserSchema = Joi.object({
     lastName: lastName.required(),
     phone: phone.required(),
     profilePicture: profilePicture,
+    role: role,
     address: address.required(),
     email: email.required(),
     password: password.required(),
