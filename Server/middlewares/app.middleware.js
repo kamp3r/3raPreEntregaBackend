@@ -9,6 +9,8 @@ const passport = require('passport');
 const connectSession = require('../auth/session/session.js');
 
 const connectMiddleware = (app) => {
+  app.set('view engine', 'ejs');
+  app.set('views', './public/views');
   app.use(express.json());
   app.use(express.urlencoded({ extended: true })); 
   app.use(cors())
