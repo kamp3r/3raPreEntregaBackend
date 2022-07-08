@@ -41,7 +41,13 @@ ejsRouter.get('/profile', isAuthenticated, (req,res)=>{
     res.render('profile', {
         title: 'profile',
         user: req.user,
-        patch: true
+    })
+})
+
+ejsRouter.get('/profile/edit', isAuthenticated, (req,res)=>{
+    res.render('edit', {
+        title: 'edit',
+        user: req.user,
     })
 })
 
@@ -55,6 +61,20 @@ ejsRouter.get('/logout', isAuthenticated, (req,res)=>{
         if(err){
             return next(err)
         }
+    })
+})
+
+ejsRouter.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'about',
+        user: req.user
+    })
+})
+
+ejsRouter.get('/contact', (req, res) => {
+    res.render('contact', {
+        title: 'contact',
+        user: req.user
     })
 })
 
