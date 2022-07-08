@@ -1,4 +1,5 @@
 const ejsRouter = require('express').Router();
+const isAuthenticated = require('../middlewares/auth.middleware');
 const { productHandler } = require('../daos');
 
 ejsRouter.get('/', (req, res) => {
@@ -36,12 +37,24 @@ ejsRouter.get('/login', (req, res) => {
     })
 })
 
-ejsRouter.get('/profile', (req,res)=>{
-    console.log(req.user);
+ejsRouter.get('/profile', isAuthenticated, (req,res)=>{
     res.render('profile', {
         title: 'profile',
         user: req.user,
         patch: true
+    })
+})
+
+ejsRouter.get('/logout', isAuthenticated, (req,res)=>{
+    res.clearCookie('turbinasunmira')
+    res.render('logout', {
+        title: 'logout',
+        user: req.user,
+    })
+    req.logout((err)=>{
+        if(err){
+            return next(err)
+        }
     })
 })
 

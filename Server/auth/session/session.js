@@ -14,6 +14,7 @@ const connectSession = (app) => {
       cookie: {
         maxAge: 60000,
       },
+      name: String(process.env.COOKIENAME)
     })
   );
 };
