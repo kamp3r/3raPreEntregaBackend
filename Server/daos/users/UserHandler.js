@@ -7,14 +7,14 @@ class UserHandler extends MongoHandler {
   constructor() {
     super('users', {
       _id: { type: String },
-      email: { type: String, required: true, unique: true },
-      password: { type: String, required: true},
-      role: { type: String, default: 'user', enum: ['user', 'admin'] },
       name: { type: String, required: true },
       lastName: { type: String, required: true },
-      phone: { type: String, required: true, unique: true },
-      profilePicture: { type: String },
+      email: { type: String, required: true, unique: true },
       address: { type: String },
+      phone: { type: String, required: true, unique: true },
+      password: { type: String, required: true},
+      picture: { data: Buffer, type: String },
+      role: { type: String, default: 'user', enum: ['user', 'admin'] },
       createdAt: { type: Date},
     });
   }
@@ -29,7 +29,16 @@ class UserHandler extends MongoHandler {
       delete newUser._doc.password
       return newUser;
     }catch(error){
-      throw boom.conflict('The data is already in use');
+      console.error(error);
+    }
+  }
+  async getUserById(id) {
+    try{
+      const user = await this.collection.findOne({_id: id});
+      delete user._doc.password;
+      return user;
+    }catch(error){
+      console.error(error);
     }
   }
   async getUser(email, password) {
@@ -48,13 +57,18 @@ class UserHandler extends MongoHandler {
       console.log(err);
     }
   }
-  async updateUser(id, user) {
+  async updateUser(id, data) {
     try {
-      const updatedUser = await this.collection.updateOne(
-        { _id: id },
-        { $set: user }
-      );
+      if(data.password.length > 0){
+      const user = await bcrypt.hash(data.password, 10)
+      const updatedUser = await this.collection.findByIdAndUpdate(id, user);
       return updatedUser;
+      }else{
+        delete data.password;
+        const updatedUser = await this.collection.findByIdAndUpdate(id, data);
+        return updatedUser;
+      }
+      
     } catch (err) {
       console.log(err);
     }

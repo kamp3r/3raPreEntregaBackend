@@ -4,7 +4,7 @@ const ejsRouter = require('./ejs.routes');
 
 const routerAPI = (app) => {
   app.use('/api/products', ProductRouter);
-  app.use('/', AuthRouter);
+  app.use('/auth', AuthRouter);
   app.use('/', ejsRouter);
 };
 

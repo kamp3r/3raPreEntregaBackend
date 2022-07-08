@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>E-Shop</title>
+</head>
+<%-include('./partials/header.ejs')%>
+
+<body>
+  <section class="mx-10 my-10">
+    <div class="flex items-center justify-center mx-10 my-10 sm:mx-0">
+        <div class="px-8 py-6 mt-4 text-left bg-white shadow-lg md:w-1/2 lg:w-1/2 sm:w-1/2">
+            <h3 class="text-2xl font-bold text-center">Log In</h3>
+            <form action="auth/login" method="POST">
+                <div class="mt-4">
+                    <div class="mt-4">
+                        <label class="block" for="email">Email<label>
+                                <input type="text" placeholder="Email"
+                                name="email"
+                                    class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
+                    </div>
+                    <div class="mt-4">
+                        <label for="password" class="block">Password<label>
+                                <input type="password" placeholder="Password" name="password"
+                                    class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
+                    </div>
+                    <div class="flex">
+                        <button class="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Log In</button>
+                    </div>
+                    <div class="mt-6 text-grey-dark">
+                        No tenes cuenta?
+                        <a class="text-blue-600 hover:underline" href="/login">
+                            Registrate
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </section>
+</body>
+
+<script src="../JS/index.js"></script>
+</html>

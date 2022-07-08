@@ -18,6 +18,13 @@ class MongoHandler {
       console.error(err);
     }
   }
+  async findOne(query) {
+    try {
+      return await this.collection.findOne(query);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
 
 module.exports = MongoHandler;
