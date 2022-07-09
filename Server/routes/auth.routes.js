@@ -1,6 +1,6 @@
 const AuthRouter = require("express").Router();
 const passport = require("passport");
-const upload = require("../middlewares/multer.middleware");
+const { uploadImgUser } = require("../middlewares/multer.middleware");
 const { userHandler } = require("../daos");
 const validatorSchema = require("../middlewares/validatorSchema.middleware");
 const {
@@ -9,15 +9,26 @@ const {
 } = require("../schemas/user.schema");
 
 
-AuthRouter.post("/register",upload.single('picture'), validatorSchema(createUserSchema), passport.authenticate('signup',{ successRedirect: "/login", failureRedirect: "/register", passReqToCallback: true }),
+AuthRouter.post("/register",uploadImgUser.single('picture'), validatorSchema(createUserSchema), passport.authenticate('signup',{ successRedirect: "/login", failureRedirect: "/register", passReqToCallback: true }),
   
 );
 
 AuthRouter.post('/login', passport.authenticate('signin',{ successRedirect: "/profile", failureFlash: "/login", passReqToCallback: true}))
 
-AuthRouter.patch('/profile/:id',upload.single('picture'), async(req, res, next) => {
+AuthRouter.patch('/edit/:id',uploadImgUser.single('picture'), async(req, res, next) => {
     try {
-        const user = await userHandler.updateUser(req.params.id, req.body);
+        const data = {
+            name: req.body.name,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            address: req.body.address,
+            phone: req.body.full_phone[1],
+            password: req.body.password
+        }
+        if(req.file){
+            data.picture = req.file.filename
+        }
+        const user = await userHandler.updateUser(req.params.id, data);
         res.redirect('/profile');
       } catch (error) {
         next(error);

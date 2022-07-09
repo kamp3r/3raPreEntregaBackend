@@ -44,9 +44,10 @@ ejsRouter.get('/profile', isAuthenticated, (req,res)=>{
     })
 })
 
-ejsRouter.get('/profile/edit', isAuthenticated, (req,res)=>{
+ejsRouter.get('/editProfile', isAuthenticated, (req,res)=>{
     res.render('edit', {
-        title: 'edit',
+        PATCH: true,
+        title: 'editProfile',
         user: req.user,
     })
 })
@@ -74,6 +75,16 @@ ejsRouter.get('/about', (req, res) => {
 ejsRouter.get('/contact', (req, res) => {
     res.render('contact', {
         title: 'contact',
+        user: req.user
+    })
+})
+
+ejsRouter.get('/detail/:id', async (req, res) => {
+    const product = await productHandler.getProductById(req.params.id);
+    console.log(product);
+    res.render('productDetail', {
+        product,
+        title: `${product.name}`,
         user: req.user
     })
 })

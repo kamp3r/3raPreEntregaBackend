@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/style.css">
-  <title>E-Shop</title>
-</head>
-<%-include('./partials/header.ejs')%>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>E-Shop</title>
+  </head>
+  <%-include('./partials/header.ejs')%>
 
-<body>
-  <section class="mx-10 my-10">
-
-    <div class="flex items-center justify-center mx-10 my-10 sm:mx-0">
-
+  <body>
+    <section class="mx-10 my-10">
+      <div class="flex items-center justify-center mx-10 my-10 sm:mx-0">
         <%-include('./partials/formEdit.ejs')%>
+      </div>
+    </section>
+  </body>
 
-    </div>
-
-  </section>
-</body>
-
-<script src="../JS/index.js"></script>
+  <script src="../JS/update.js"></script>
+  <script src="../JS/index.js"></script>
 </html>

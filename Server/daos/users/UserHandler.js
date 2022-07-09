@@ -1,6 +1,7 @@
 const MongoHandler = require('../../services/mongoHandler');
 const boom = require('@hapi/boom');
 const { v4: uuidv4 } = require('uuid')
+const sendMail = require('../../mail/mailsender');
 const bcrypt = require('bcrypt');
 
 class UserHandler extends MongoHandler {
@@ -27,6 +28,7 @@ class UserHandler extends MongoHandler {
         createdAt: new Date()
       });
       delete newUser._doc.password
+      sendMail(newUser);
       return newUser;
     }catch(error){
       console.error(error);

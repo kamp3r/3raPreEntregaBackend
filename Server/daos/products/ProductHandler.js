@@ -35,12 +35,12 @@ class ProductHandler extends MongoHandler {
     return productsArray;
   }
   async getProductById(id) {
-    const product = await this.collection.findOne({ id: id });
+    const product = await this.collection.findOne({ _id: id });
     if (!product) {
       throw boom.notFound('No product found');
     }
     return {
-      id: product._id,
+      _id: product._id,
       title: product.title,
       price: product.price,
       thumbnail: product.thumbnail,

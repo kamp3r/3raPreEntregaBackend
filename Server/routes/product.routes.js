@@ -1,5 +1,6 @@
 const ProductRouter = require('express').Router();
 const { productHandler } = require('../daos');
+const { uploadImgProd } = require("../middlewares/multer.middleware");
 const validatorSchema = require('../middlewares/validatorSchema.middleware');
 const {
   getProductSchema,
@@ -27,9 +28,9 @@ ProductRouter.get('/:id?', async (req, res, next) => {
 ProductRouter.post(
   '/',
   validatorSchema(createProductSchema, 'body'),
+  uploadImgProd.single('thumbnail'),
   async (req, res, next) => {
     try {
-      console.log(req.body);
       const product = await productHandler.createProduct(req.body);
       res.status(201).json(product);
     } catch (error) {
@@ -38,7 +39,7 @@ ProductRouter.post(
   }
 );
 
-ProductRouter.patch('/:id',validatorSchema(getProductSchema, 'params'),validatorSchema(updateProductSchema, 'body'), async (req, res, next) => {
+ProductRouter.patch('/:id',validatorSchema(getProductSchema, 'params'),validatorSchema(updateProductSchema, 'body'), uploadImgProd.single('thumbnail'), async (req, res, next) => {
   try {
     const data = req.body;
     const updatedAt = new Date();
