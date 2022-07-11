@@ -1,12 +1,12 @@
 const Joi = require('joi');
 
 const _id = Joi.string();
-const title = Joi.string().min(4).max(80);
-const price = Joi.number().integer().min(399);
-const thumbnail = Joi.string().uri();
-const description = Joi.string().min(4).max(500);
-const code = Joi.string().min(4).max(80);
-const stock = Joi.number().integer().min(0);
+const title = Joi.string()
+const price = Joi.number().integer()
+const thumbnail = Joi.string();
+const description = Joi.string()
+const code = Joi.string()
+const stock = Joi.number().integer()
 const createdAt = Joi.date();
 const updateAt = Joi.date();
 

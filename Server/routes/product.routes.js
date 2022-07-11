@@ -25,29 +25,43 @@ ProductRouter.get('/:id?', async (req, res, next) => {
   }
 });
 
-ProductRouter.post(
-  '/',
-  validatorSchema(createProductSchema, 'body'),
-  uploadImgProd.single('thumbnail'),
-  async (req, res, next) => {
+ProductRouter.post('/',uploadImgProd.single('thumbnail'), validatorSchema(createProductSchema),async (req, res, next) => {
     try {
-      const product = await productHandler.createProduct(req.body);
-      res.status(201).json(product);
+      console.log(req.body);
+      const data = {
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        thumbnail: req.file.filename,
+        code: req.body.code,
+        stock: req.body.stock,
+      };
+      await productHandler.createProduct(data);
+      res.status(201).redirect('/admin');
     } catch (error) {
       next(error);
     }
   }
 );
 
-ProductRouter.patch('/:id',validatorSchema(getProductSchema, 'params'),validatorSchema(updateProductSchema, 'body'), uploadImgProd.single('thumbnail'), async (req, res, next) => {
+ProductRouter.patch('/edit/:id',uploadImgProd.single('thumbnail'), validatorSchema(getProductSchema),validatorSchema(updateProductSchema), async (req, res, next) => {
   try {
-    const data = req.body;
+    const productInfo = {
+      title: req.body.title,
+      description: req.body.description,
+      price: req.body.price,
+      code: req.body.code,
+      stock: req.body.stock,
+    }
+    if(req.file){
+      productInfo.thumbnail = req.file.filename
+  }
     const updatedAt = new Date();
-    const product = await productHandler.updateProduct(req.params.id, {
-      ...data,
+    await productHandler.updateProduct(req.params.id, {
+      ...productInfo,
       updatedAt,
     });
-    res.status(200).json(product);
+    res.status(200).redirect('/admin');
   } catch (error) {
     next(error);
   }
@@ -56,7 +70,7 @@ ProductRouter.patch('/:id',validatorSchema(getProductSchema, 'params'),validator
 ProductRouter.delete('/:id', async (req, res, next) => {
   try {
     const product = await productHandler.deleteProduct(req.params.id);
-    res.status(200).json(product);
+    res.status(200).redirect('/admin')
   } catch (error) {
     next(error);
   }

@@ -10,6 +10,8 @@ const configuration = {
     dbName: process.env.DATABASE_NAME,
     mail: process.env.MAIL,
     mailPass: process.env.MAILPASS,
+    twilioSID: process.env.TWILIOSID,
+    twilioTKN: process.env.TWILIOTOKEN
 }
 
 module.exports = {configuration};
