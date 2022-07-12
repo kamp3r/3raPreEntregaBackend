@@ -24,9 +24,13 @@
           </a>
           <div class="flex flex-col justify-between items-center">
             <span class="text-2xl font-bold text-gray-900 dark:text-white">$<%=prods.price%></span>
+            <%if(user){%>
             <form action="/cart/add/<%=prods.id%>" method="POST">
               <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</button>
             </form>
+            <%}else{%>
+            <a href="/login" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
+            <%}%>
           </div>
         </div>
       </div>

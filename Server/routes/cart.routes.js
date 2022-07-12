@@ -70,5 +70,20 @@ cartRouter.post('/buy', async (req, res, next) => {
     }
 });
 
+cartRouter.delete('/delete/:id', async (req, res, next) => {
+    try {
+        const cart = req.session.cart;
+        for (let i = 0; i < cart.length; i++) {
+            if (cart[i].id === req.params.id) {
+                cart.splice(i, 1);
+                break;
+            }
+        }
+        res.redirect('back');
+    } catch (error) {
+        next(error);
+    }
+})
+
 
 module.exports = cartRouter;

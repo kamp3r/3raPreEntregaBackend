@@ -1,7 +1,7 @@
 const MongoHandler = require('../../services/mongoHandler');
 const boom = require('@hapi/boom');
 const { v4: uuidv4 } = require('uuid')
-const sendMail = require('../../mail/mailsender');
+const {sendMail} = require('../../mail/mailsender');
 const bcrypt = require('bcrypt');
 
 class UserHandler extends MongoHandler {

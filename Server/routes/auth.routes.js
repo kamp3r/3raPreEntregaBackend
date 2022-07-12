@@ -13,7 +13,7 @@ AuthRouter.post("/register",uploadImgUser.single('picture'), validatorSchema(cre
   
 );
 
-AuthRouter.post('/login', passport.authenticate('signin',{ successRedirect: "/profile", failureFlash: "/login", passReqToCallback: true}))
+AuthRouter.post('/login', passport.authenticate('signin',{ successRedirect: "/profile", failureRedirect: "/login", passReqToCallback: true}))
 
 AuthRouter.patch('/edit/:id',uploadImgUser.single('picture'), async(req, res, next) => {
     try {
