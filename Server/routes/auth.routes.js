@@ -9,7 +9,7 @@ const {
 } = require("../schemas/user.schema");
 
 
-AuthRouter.post("/register",uploadImgUser.single('picture'), validatorSchema(createUserSchema), passport.authenticate('signup',{ successRedirect: "/login", failureRedirect: "/register", passReqToCallback: true }),
+AuthRouter.post("/register",uploadImgUser.single('picture'), validatorSchema(createUserSchema), passport.authenticate('signup',{ successRedirect: "/profile", failureRedirect: "/register", passReqToCallback: true }),
   
 );
 

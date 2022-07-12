@@ -98,7 +98,8 @@ ejsRouter.get('/detail/:id', async (req, res) => {
 });
 
 ejsRouter.get('/myCart/checkout', async (req, res) => {
-  console.log(req.session.cart)
+  if(req.session.cart == undefined){
+    req.session.cart = [];}
   res.render('checkout', {
     title: 'checkout',
     user: req.user,
