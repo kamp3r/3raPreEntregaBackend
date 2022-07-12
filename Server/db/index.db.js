@@ -1,5 +1,6 @@
 const { configuration } = require('../config/config');
 const mongoose = require('mongoose');
+const logger = require("../logger/logger.js");
 
 const USER = encodeURIComponent(configuration.dbUser);
 const PASSWORD = encodeURIComponent(configuration.dbPassword);
@@ -12,9 +13,9 @@ const connect = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log('Database connected');
+    logger.info('Database connected');
   } catch (err) {
-    console.log(err);
+    logger.error('Database connection error', err);
   }
 };
 

@@ -12,7 +12,7 @@
    />
    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
     <%-include('./partials/header.ejs')%>
     
     <div class="flex items-center justify-center mx-10 my-10 sm:mx-0">
@@ -71,6 +71,7 @@
             </form>
         </div>
     </div>
+    <%-include('./partials/footer.ejs')%>
     <script src="../JS/index.js"></script>
     <script src="../JS/register.js"></script>
 </body>
